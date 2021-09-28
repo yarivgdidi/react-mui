@@ -10,15 +10,9 @@ export function Layout(){
         <div className="main-layout">
             <Router>
                 <Switch>
-                    <Route path="/sign-in">
-                        <SignIn />
-                    </Route>
-                    <Route path="/sign-up">
-                        <SignUp />
-                    </Route>
-                    <Route path="/forgot-password">
-                        <ForgotPassword />
-                    </Route>
+                    <Route exact component={SignIn} path="/sign-in"/>
+                    <Route exact component={SignUp} path="/sign-up"/>
+                    <Route exact component={ForgotPassword}  path="/forgot-password"/>
                     <Route path="/">
                         <Home />
                     </Route>

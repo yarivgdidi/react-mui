@@ -1,4 +1,5 @@
-import * as React from 'react';
+import  React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
@@ -6,6 +7,9 @@ import {
     Button, Typography, Link, Container, Box, Avatar, Grid
 } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import {selectUser, signupUser, clearState} from '../userSlice';
+
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 
 function Copyright(props: any) {
     return (
@@ -23,14 +27,30 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export function SignUp() {
+    const history = useHistory();
+    const dispatch = useAppDispatch();
+    const { isFetching, isSuccess, isError, errorMessage } = useAppSelector(selectUser)
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(clearState())
+            history.push("/")
+        }
+        if (isError) {
+            console.error(errorMessage)
+            dispatch(clearState())
+        }
+    }, [isSuccess, isError])
+
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const firstName = data.get('firstName');
+        const lastName = data.get('lastName');
+        const email = data.get('email');
+        const password = data.get('password');
+        dispatch(signupUser({ firstName, lastName, email, password}))
     };
 
     return (
