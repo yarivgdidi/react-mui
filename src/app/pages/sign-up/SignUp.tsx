@@ -2,18 +2,9 @@ import * as React from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
-    Button,
-    Checkbox,
-    CssBaseline,
-    FormControlLabel,
-    TextField,
-    Typography,
-    Link,
-    Container,
-    Box,
-    Avatar, Grid
+    Checkbox, CssBaseline, FormControlLabel, TextField,
+    Button, Typography, Link, Container, Box, Avatar, Grid
 } from "@mui/material";
-
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 function Copyright(props: any) {
@@ -64,7 +55,7 @@ export function SignUp() {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="fname"
+                                    autoComplete="firstName"
                                     name="firstName"
                                     required
                                     fullWidth
@@ -80,7 +71,7 @@ export function SignUp() {
                                     id="lastName"
                                     label="Last Name"
                                     name="lastName"
-                                    autoComplete="lname"
+                                    autoComplete="lastName"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -121,7 +112,7 @@ export function SignUp() {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="sign-in" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

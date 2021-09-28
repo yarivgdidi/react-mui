@@ -8,10 +8,8 @@ import {
     Box,
     Button,
     Link,
-    Checkbox,
     Container,
     CssBaseline,
-    FormControlLabel,
     Grid,
     TextField,
     Typography
@@ -32,14 +30,13 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export function SignIn() {
+export function ForgotPassword() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
         console.log({
             email: data.get('email'),
-            password: data.get('password'),
         });
     };
 
@@ -59,7 +56,7 @@ export function SignIn() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Forgot Password?
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
@@ -72,37 +69,23 @@ export function SignIn() {
                             autoComplete="email"
                             autoFocus
                         />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
+                            Send Email
                         </Button>
                         <Grid container>
-                            <Grid item xs >
-                                <Link href="forgot-password" variant="body2">
-                                    Forgot password?
+                            <Grid item xs>
+                                <Link href="sign-in" variant="body2">
+                                    Sign in
                                 </Link>
                             </Grid>
-                            <Grid item >
+                            <Grid item xs>
                                 <Link href="sign-up" variant="body2">
-                                    {"Don't have an account? Sign Up"}
+                                    {"Sign Up"}
                                 </Link>
                             </Grid>
                         </Grid>

@@ -3,23 +3,29 @@ import {
     Route,
     Switch
 } from "react-router-dom";
-import { SignIn, SignUp, Home} from '../pages'
+import { SignIn, SignUp, ForgotPassword, Home} from '../pages'
 
 export function Layout(){
     return (
-        <Router>
-            <Switch>
-                <Route path="/sign-in">
-                    <SignIn />
-                </Route>
-                <Route path="/sign-up">
-                    <SignUp />
-                </Route>
-                <Route path="/">
-                    <Home />
-                </Route>
-            </Switch>
-        </Router>
+        <div className="main-layout">
+            <Router>
+                <Switch>
+                    <Route path="/sign-in">
+                        <SignIn />
+                    </Route>
+                    <Route path="/sign-up">
+                        <SignUp />
+                    </Route>
+                    <Route path="/forgot-password">
+                        <ForgotPassword />
+                    </Route>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
+
     )
 }
 
