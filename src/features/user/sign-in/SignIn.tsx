@@ -1,21 +1,17 @@
-import * as React from 'react';
-
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LoadingButton from '@mui/lab/LoadingButton';
 import {
-    Avatar,
-    Box,
-    Button,
-    Link,
-    Checkbox,
-    Container,
-    CssBaseline,
-    FormControlLabel,
-    Grid,
-    TextField,
-    Typography
+    Avatar, Box, Link, Container, Grid, Typography,
+    Checkbox, CssBaseline, FormControlLabel, TextField
 } from "@mui/material";
+
+import {selectUser, signinUser, clearState} from '../userSlice';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+
 
 function Copyright(props: any) {
     return (
@@ -33,14 +29,28 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export function SignIn() {
+    const history = useHistory();
+    const dispatch = useAppDispatch();
+    const { isFetching, isSuccess, isError } = useAppSelector(selectUser)
+
+    useEffect(() => {
+        if (isError) {
+            dispatch(clearState());
+        }
+        if (isSuccess) {
+            dispatch(clearState());
+            history.push('/');
+        }
+    }, [isError, isSuccess, history, dispatch]);
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+
+        const email = data.get('email');
+        const password= data.get('password');
+        dispatch(signinUser({ email, password}))
     };
 
     return (
@@ -86,14 +96,15 @@ export function SignIn() {
                             control={<Checkbox value="remember" color="primary" />}
                             label="Remember me"
                         />
-                        <Button
+                        <LoadingButton
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            loading={isFetching}
                         >
                             Sign In
-                        </Button>
+                        </LoadingButton>
                         <Grid container>
                             <Grid item xs >
                                 <Link href="forgot-password" variant="body2">

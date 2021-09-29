@@ -4,12 +4,13 @@ import { useHistory } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
     Checkbox, CssBaseline, FormControlLabel, TextField,
-    Button, Typography, Link, Container, Box, Avatar, Grid
+    Typography, Link, Container, Box, Avatar, Grid
 } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import {selectUser, signupUser, clearState} from '../userSlice';
 
+import {selectUser, signupUser, clearState} from '../userSlice';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import {LoadingButton} from "@mui/lab";
 
 function Copyright(props: any) {
     return (
@@ -29,7 +30,7 @@ const theme = createTheme();
 export function SignUp() {
     const history = useHistory();
     const dispatch = useAppDispatch();
-    const { isFetching, isSuccess, isError, errorMessage } = useAppSelector(selectUser)
+    const { isFetching, isSuccess, isError } = useAppSelector(selectUser)
 
     useEffect(() => {
         if (isSuccess) {
@@ -37,10 +38,9 @@ export function SignUp() {
             history.push("/")
         }
         if (isError) {
-            console.error(errorMessage)
             dispatch(clearState())
         }
-    }, [isSuccess, isError])
+    }, [isSuccess, isError, history, dispatch])
 
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -122,14 +122,15 @@ export function SignUp() {
                                 />
                             </Grid>
                         </Grid>
-                        <Button
+                        <LoadingButton
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            loading={isFetching}
                         >
                             Sign Up
-                        </Button>
+                        </LoadingButton>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link href="sign-in" variant="body2">

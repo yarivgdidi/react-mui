@@ -8,3 +8,12 @@ export function signup({ firstName, lastName, email, password }) {
         }), 500)
     );
 }
+// @ts-ignore
+export function signin({ email, password }) {
+    return new Promise<{ data: any, status: number }>((resolve) =>
+        setTimeout(() => resolve({
+            data: {firstName: 'aaaa', lastName: 'bbb', email, token:'token:12345'  },
+            status: 200
+        }), 5000)
+    );
+}
