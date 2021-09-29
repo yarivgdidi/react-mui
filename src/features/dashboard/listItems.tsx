@@ -10,36 +10,31 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
-import { Link, LinkProps } from 'react-router-dom';
-const AdapterLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
-    <Link innerRef={ref as any} {...props} />
-));
-
 export const mainListItems = (
     <div>
-        <ListItem button  component={AdapterLink} to="/">
+        <ListItem button>
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem button component={AdapterLink} to="/sign-in">
+        <ListItem button>
             <ListItemIcon>
                 <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary="Login" />
+            <ListItemText primary="Orders" />
         </ListItem>
-        <ListItem button component={AdapterLink} to="/sign-up">
+        <ListItem button>
             <ListItemIcon>
                 <PeopleIcon />
             </ListItemIcon>
-            <ListItemText primary="Sign Up" />
+            <ListItemText primary="Customers" />
         </ListItem>
-        <ListItem button component={AdapterLink} to="/counter">
+        <ListItem button>
             <ListItemIcon>
                 <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="Counter" />
+            <ListItemText primary="Reports" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>

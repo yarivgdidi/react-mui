@@ -2,8 +2,8 @@ import  React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import {
-    Checkbox, FormControlLabel, TextField,
-    Typography, Link, Box, Avatar, Grid
+    Checkbox, FormControlLabel, TextField, Container,
+    Typography, Link, Box, Avatar, Grid, CssBaseline
 } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
@@ -52,6 +52,8 @@ export function SignUp() {
 
     return (
         <div>
+            <Container component="main" maxWidth="xs">
+            <CssBaseline />
             <Box
                 sx={{
                     marginTop: 8,
@@ -136,6 +138,7 @@ export function SignUp() {
                 </Box>
             </Box>
             <Copyright sx={{ mt: 5 }} />
+            </Container>
         </div>
     );
 }

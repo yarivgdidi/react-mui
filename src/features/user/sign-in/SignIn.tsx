@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import LoadingButton from '@mui/lab/LoadingButton';
 import {
-    Avatar, Box, Link, Grid, Typography,
+    Avatar, Box, Link, Grid, Typography, Container, CssBaseline,
     Checkbox, FormControlLabel, TextField
 } from "@mui/material";
 
@@ -52,6 +52,8 @@ export function SignIn() {
 
     return (
         <div>
+            <Container component="main" maxWidth="xs">
+            <CssBaseline />
             <Box
                 sx={{
                     marginTop: 8,
@@ -114,7 +116,10 @@ export function SignIn() {
                     </Grid>
                 </Box>
             </Box>
+
+
             <Copyright sx={{ mt: 8, mb: 4 }} />
+            </Container>
         </div>
     );
 }

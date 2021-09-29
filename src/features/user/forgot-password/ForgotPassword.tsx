@@ -9,7 +9,7 @@ import {
     Link,
     Grid,
     TextField,
-    Typography
+    Typography, CssBaseline, Container
 } from "@mui/material";
 
 function Copyright(props: any) {
@@ -39,6 +39,8 @@ export function ForgotPassword() {
 
     return (
         <div>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
             <Box
                 sx={{
                     marginTop: 8,
@@ -87,6 +89,7 @@ export function ForgotPassword() {
                 </Box>
             </Box>
             <Copyright sx={{ mt: 8, mb: 4 }} />
+            </Container>
         </div>
     );
 }
