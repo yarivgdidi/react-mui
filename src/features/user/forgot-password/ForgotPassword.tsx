@@ -11,6 +11,7 @@ import {
     TextField,
     Typography, CssBaseline, Container
 } from "@mui/material";
+import {Page} from "../../../app/layout/Page";
 
 function Copyright(props: any) {
     return (
@@ -38,7 +39,7 @@ export function ForgotPassword() {
     };
 
     return (
-        <div>
+        <Page>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
             <Box
@@ -90,6 +91,6 @@ export function ForgotPassword() {
             </Box>
             <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
-        </div>
+        </Page>
     );
 }

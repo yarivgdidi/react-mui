@@ -10,6 +10,7 @@ import {
 
 import {selectUser, signinUser, clearState} from '../userSlice';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import {Page} from "../../../app/layout/Page";
 
 
 function Copyright(props: any) {
@@ -51,7 +52,7 @@ export function SignIn() {
     };
 
     return (
-        <div>
+        <Page>
             <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -120,6 +121,6 @@ export function SignIn() {
 
             <Copyright sx={{ mt: 8, mb: 4 }} />
             </Container>
-        </div>
+        </Page>
     );
 }

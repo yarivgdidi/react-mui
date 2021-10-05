@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {selectUser, signupUser, clearState} from '../userSlice';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import {LoadingButton} from "@mui/lab";
+import {Page} from "../../../app/layout/Page";
 
 function Copyright(props: any) {
     return (
@@ -51,7 +52,7 @@ export function SignUp() {
     };
 
     return (
-        <div>
+        <Page>
             <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -139,6 +140,6 @@ export function SignUp() {
             </Box>
             <Copyright sx={{ mt: 5 }} />
             </Container>
-        </div>
+        </Page>
     );
 }

@@ -35,11 +35,23 @@ export const mainListItems = (
             </ListItemIcon>
             <ListItemText primary="Sign Up" />
         </ListItem>
+        <ListItem button component={AdapterLink} to="/forgot-password">
+            <ListItemIcon>
+                <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Forgot Password" />
+        </ListItem>
         <ListItem button component={AdapterLink} to="/counter">
             <ListItemIcon>
                 <BarChartIcon />
             </ListItemIcon>
             <ListItemText primary="Counter" />
+        </ListItem>
+        <ListItem button component={AdapterLink} to="/firestore">
+            <ListItemIcon>
+                <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Firestore" />
         </ListItem>
         <ListItem button>
             <ListItemIcon>
