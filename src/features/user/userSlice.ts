@@ -57,6 +57,7 @@ export const signinUser = createAsyncThunk(
 export const userSlice = createSlice({
     name: "user",
     initialState: {
+        id: "",
         firstName: "",
         lastName: "",
         email: "",
@@ -74,10 +75,11 @@ export const userSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(signupUser.fulfilled, (state, payload: any ) => {
+        builder.addCase(signupUser.fulfilled, (state,{ payload }: any ) => {
             console.log('signupUser.fulfilled', { payload } )
             state.isFetching = false;
             state.isSuccess = true;
+            state.id = payload.id;
             state.email = payload.email;
             state.firstName = payload.firstName;
             state.lastName = payload.lastName;
@@ -92,10 +94,11 @@ export const userSlice = createSlice({
             state.isError = true;
 
         })
-        .addCase(signinUser.fulfilled, (state, payload: any ) => {
-            console.log('signupUser.fulfilled', { payload } )
+        .addCase(signinUser.fulfilled, (state, { payload }: any ) => {
+            console.log('signupUser.fulfilled',  payload )
             state.isFetching = false;
             state.isSuccess = true;
+            state.id = payload.id;
             state.email = payload.email;
             state.firstName = payload.firstName;
             state.lastName = payload.lastName;

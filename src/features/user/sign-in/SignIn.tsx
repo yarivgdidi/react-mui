@@ -36,7 +36,6 @@ export function SignIn() {
             dispatch(clearState());
         }
         if (isSuccess) {
-            dispatch(clearState());
             history.push('/');
         }
     }, [isError, isSuccess, history, dispatch]);
