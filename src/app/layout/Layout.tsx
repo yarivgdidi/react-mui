@@ -8,7 +8,7 @@ import { AppBar } from "./AppBar"
 import { mainListItems, secondaryListItems } from './listItems';
 
 import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {Badge, Box, Container, CssBaseline,Paper,
+import {Badge, Box, Container, CssBaseline,
     Divider, IconButton, List, Toolbar, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid";
 
@@ -20,13 +20,12 @@ export function Layout({ children }: any){
     const toggleDrawer = () => {
         setOpen(!open);
     };
-    const drawerWidth: number = 240;
     return (
 
         <ThemeProvider theme={theme}>
             <Box sx={{ display: 'flex' }}>
             <CssBaseline/>
-            {/*<div className="main-layout">*/}
+
                 <AppBar position="absolute" >
                     <Toolbar sx={{pr: '24px',  /* keep right padding when drawer closed */}}>
                         <IconButton
@@ -55,7 +54,7 @@ export function Layout({ children }: any){
                         </IconButton>
                     </Toolbar>
                 </AppBar>
-                <Drawer variant="permanent" open={open} drawerWidth={drawerWidth}>
+                <Drawer variant="permanent" open={open} >
 
                     <Toolbar
                         sx={{
@@ -94,7 +93,6 @@ export function Layout({ children }: any){
                         <Grid container spacing={3}>
                             { children }
                         </Grid>
-                        {/*<Copyright sx={{ pt: 4 }} />*/}
                     </Container>
                 </Box>
             </Box>

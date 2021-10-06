@@ -44,11 +44,12 @@ export function SignIn() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
+        let email = data.get('email') as string;
+        let password = data.get('password') as string;
+        if (email && password) {
+            dispatch(signinUser({ email, password}))
+        }
 
-        const email = data.get('email');
-        const password= data.get('password');
-        dispatch(signinUser({ email, password}))
     };
 
     return (

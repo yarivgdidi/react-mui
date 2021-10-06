@@ -2,6 +2,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { signup, signin } from "./userApi";
 import { RootState } from "../../app/store";
 
+export interface User {
+    id?: string;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    password?: string;
+    token?: string
+}
+
 export const signupUser = createAsyncThunk(
     "users/signupUser",
     async (payload:any, thunkAPI) => {
@@ -12,7 +21,7 @@ export const signupUser = createAsyncThunk(
             const {data} = res
             if (res.status === 200) {
                 const {firstName, lastName, email, token} = data
-                localStorage.setItem("token", token)
+                localStorage.setItem("token", token!)
                 return {...data, firstName, lastName, email }
             } else {
                 return thunkAPI.rejectWithValue(data)
@@ -25,16 +34,17 @@ export const signupUser = createAsyncThunk(
 
 export const signinUser = createAsyncThunk(
     "users/signinUser",
-    async (payload:any, thunkAPI) => {
+    async (payload:User, thunkAPI) => {
         try {
             const { email, password} = payload
+
             // Ideally signup should come from generated client API
             const res = await signin({ email, password })
             const {data} = res
             if (res.status === 200) {
-                const {firstName, lastName, email, token} = data
-                localStorage.setItem("token", token)
-                return {...data, firstName, lastName, email }
+                const {id, firstName, lastName, email, token} = data
+                localStorage.setItem("token", token!)
+                return { id, firstName, lastName, email, token }
             } else {
                 return thunkAPI.rejectWithValue(data)
             }

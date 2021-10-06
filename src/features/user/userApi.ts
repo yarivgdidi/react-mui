@@ -1,19 +1,40 @@
-// A mock function to mimic making an async request for data
-// @ts-ignore
-export function signup({ firstName, lastName, email, password }) {
-    return new Promise<{ data: any, status: number }>((resolve) =>
-        setTimeout(() => resolve({
-            data: { firstName, lastName, email, token:'token:12345'  },
-            status: 200
-        }), 500)
-    );
+import { collection, query, where, limit, getDocs } from "firebase/firestore";
+import {User} from "./userSlice";
+import {db, createDoc} from "../../services/firestore";
+
+
+export async function signup(user: User): Promise<{ data:User; status: number }>{
+    const { firstName, lastName, email, password } = user;
+    // todo - encrypt password
+    // todo - generate real JWT token - this should have been done in auth server
+    const docRef = await createDoc( 'users', { firstName, lastName, email, password })
+    if (docRef) {
+        const token = `token: ${docRef}`
+        const id = docRef.id
+        return {
+            status: 200,
+            data: { id,firstName, lastName, email, token }
+        }
+    }
+    throw new Error ('Unable to sign up')
 }
-// @ts-ignore
-export function signin({ email, password }) {
-    return new Promise<{ data: any, status: number }>((resolve) =>
-        setTimeout(() => resolve({
-            data: {firstName: 'aaaa', lastName: 'bbb', email, token:'token:12345'  },
-            status: 200
-        }), 5000)
-    );
+
+export async function signin({ email, password }: User): Promise<{ data:User; status: number }>{
+
+    const q = query(collection(db, "users"), where("email", "==", email), limit(1));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.docs.length === 1) {
+        // todo - encrypt password
+        // todo - generate real JWT token
+        const {id, firstName, lastName, password: storedPassword } =  querySnapshot.docs[0].data()
+        if(storedPassword === password) {
+            const token = `token: ${id}`
+            return {
+                status: 200,
+                data: { id,firstName, lastName, email, token }
+            }
+        }
+
+    }
+    throw new Error ('Unable to sign in');
 }
