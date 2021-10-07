@@ -9,13 +9,18 @@ const createGroceryList = async (event: FormEvent<HTMLFormElement>, userId: stri
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    const listName = data.get('listName');
+    const name = data.get('listName');
     const category = data.get('category');
-    const listComment = data.get('firstName');
-    // const doc = await createDoc('groceryLists', {
-    //
-    // })
-
+    const comment = data.get('firstName');
+    const docRef = await createDoc( 'groceryLists', {
+        name,
+        category,
+        comment,
+        userId,
+    })
+    if (docRef) {
+        data.set('listName', '')
+    }
 
 }
 
