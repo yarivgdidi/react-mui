@@ -5,13 +5,14 @@ import {LoadingButton} from "@mui/lab";
 import {selectUser} from "../user/userSlice";
 import {useAppSelector} from "../../app/hooks";
 
-const createGroceryList = async (event: FormEvent<HTMLFormElement>, userId: string) => {
+const createGroceryList = async (event: FormEvent<HTMLFormElement>, userId: string, refs:any) => {
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     const name = data.get('listName');
     const category = data.get('category');
-    const comment = data.get('firstName');
+    const comment = data.get('listComment');
     const docRef = await createDoc( 'groceryLists', {
         name,
         category,
@@ -19,20 +20,22 @@ const createGroceryList = async (event: FormEvent<HTMLFormElement>, userId: stri
         userId,
     })
     if (docRef) {
-        data.set('listName', '')
+      console.log(event)
     }
 
 }
 
 export function CreateGroceryList () {
+    const refs:any = {}
     const {id: userId} = useAppSelector(selectUser)
     const isFetching = false;
     return (
         <Box component="form" noValidate
-             onSubmit={(event: FormEvent<HTMLFormElement>) => createGroceryList(event, userId)} sx={{ mt: 3 }}>
+             onSubmit={(event: FormEvent<HTMLFormElement>) => createGroceryList(event, userId, refs)} sx={{ mt: 3 }}>
             <Grid container spacing={1}>
                 <Grid item xs={12} sm={3}>
                     <TextField
+                        inputRef = {ref=> refs['listName'] = ref}
                         size="small"
                         autoComplete="listName"
                         name="listName"
@@ -45,6 +48,7 @@ export function CreateGroceryList () {
                 </Grid>
                 <Grid item xs={12} sm={3}>
                     <TextField
+                        inputRef = {ref=>refs['category'] = ref}
                         size="small"
                         required
                         fullWidth
@@ -56,6 +60,7 @@ export function CreateGroceryList () {
                 </Grid>
                 <Grid item xs={12} sm={3}>
                     <TextField
+                        inputRef = {ref=>refs['listComment'] = ref}
                         size="small"
                         required
                         fullWidth

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, getDocs, QuerySnapshot } from "firebase/firestore";
+import { collection, addDoc, getDocs, QuerySnapshot, onSnapshot} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_APIKEY,
@@ -28,4 +28,13 @@ export const queryCollection = async(collectionName: string): Promise<QuerySnaps
     const querySnapshot = await getDocs(collection(db,collectionName));
     console.log(`Got ${querySnapshot.docs.length} docs` )
     return querySnapshot;
+}
+
+export const streamCollection = (collectionName: string, setterCallback: any) => {
+   return onSnapshot(collection(db,collectionName), (querySnapshot) => {
+       setterCallback(querySnapshot.docs)
+
+    });
+
+
 }
